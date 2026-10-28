@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from ultralytics import YOLO
 from pathlib import Path
@@ -196,6 +196,9 @@ def health():
 def list_targets():
     return jsonify({"targets": ALL_CN_LABELS})
 
+@app.route("/")
+def index():
+    return send_file("index.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
